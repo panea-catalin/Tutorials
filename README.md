@@ -1,47 +1,46 @@
-🖥️ Detailed Guide to Network Automation Using Python
-Chapter 1: Setting Up Your Python Environment
-1.1 Python Installation
+# 🖥️ **Detailed Guide to Network Automation Using Python**
 
-    Install Python from the official Python website.
-    Install a virtual environment tool:
+## **Chapter 1: Setting Up Your Python Environment**
 
-    bash
+### **1.1 Python Installation**
+- Install Python from the official [Python website](https://www.python.org/downloads/).
+- Install a virtual environment tool: 
+  ```bash
+  pip install virtualenv
+  ```
+  This helps you isolate your project’s dependencies.
+- Create and activate a virtual environment:
+  ```bash
+  virtualenv venv
+  source venv/bin/activate   # Linux/Mac
+  venv\Scripts\activate      # Windows
+  ```
 
-pip install virtualenv
+---
 
-This helps you isolate your project’s dependencies.
-Create and activate a virtual environment:
-
-bash
-
-    virtualenv venv
-    source venv/bin/activate   # Linux/Mac
-    venv\Scripts\activate      # Windows
-
-Chapter 2: Key Python Libraries for Network Automation
+## **Chapter 2: Key Python Libraries for Network Automation**
 
 In this chapter, we’ll go through Python libraries commonly used in network automation, their descriptions, use cases, and examples of code.
-2.1 Netmiko
+
+---
+
+### **2.1 Netmiko**
 
 Netmiko simplifies the process of connecting to network devices using SSH and executing commands. It is particularly useful for automating tasks like retrieving device configuration, making configuration changes, and managing network devices.
-2.1.1 Installation:
 
-bash
-
+#### **2.1.1 Installation:**
+```bash
 pip install netmiko
+```
 
-2.1.2 Key Functions:
+#### **2.1.2 Key Functions:**
+- **`ConnectHandler`**: Establishes an SSH connection to a network device.
+- **`send_command()`**: Executes a single command on the device and returns the output.
+- **`send_config_set()`**: Sends a series of configuration commands to the device.
 
-    ConnectHandler: Establishes an SSH connection to a network device.
-    send_command(): Executes a single command on the device and returns the output.
-    send_config_set(): Sends a series of configuration commands to the device.
-
-2.1.3 Example Script:
-
+#### **2.1.3 Example Script:**
 Connecting to a Cisco router and retrieving its running configuration:
-
-python
-
+```python
 from netmiko import ConnectHandler
 
 # Define the device parameters
@@ -63,28 +62,27 @@ print(output)
 
 # Close the connection
 connection.disconnect()
+```
 
-2.2 Paramiko
+---
+
+### **2.2 Paramiko**
 
 Paramiko is a lower-level SSH library in Python, providing more control over SSH sessions. While not as high-level as Netmiko, it's useful for advanced automation and when finer control over the SSH process is required.
-2.2.1 Installation:
 
-bash
-
+#### **2.2.1 Installation:**
+```bash
 pip install paramiko
+```
 
-2.2.2 Key Functions:
+#### **2.2.2 Key Functions:**
+- **`SSHClient()`**: Establishes an SSH connection.
+- **`exec_command()`**: Executes a command on a remote server.
+- **`get_transport()`**: Provides access to the SSH transport layer, useful for tunneling.
 
-    SSHClient(): Establishes an SSH connection.
-    exec_command(): Executes a command on a remote server.
-    get_transport(): Provides access to the SSH transport layer, useful for tunneling.
-
-2.2.3 Example Script:
-
+#### **2.2.3 Example Script:**
 Using Paramiko to connect to a device and execute a command:
-
-python
-
+```python
 import paramiko
 
 # Create SSH client
@@ -103,28 +101,27 @@ print(output)
 
 # Close the connection
 ssh.close()
+```
 
-2.3 Napalm
+---
+
+### **2.3 Napalm**
 
 Napalm (Network Automation and Programmability Abstraction Layer with Multivendor support) abstracts the differences between vendors, providing a single API to manage network devices regardless of their type (e.g., Cisco, Juniper, Arista).
-2.3.1 Installation:
 
-bash
-
+#### **2.3.1 Installation:**
+```bash
 pip install napalm
+```
 
-2.3.2 Key Functions:
+#### **2.3.2 Key Functions:**
+- **`get_facts()`**: Retrieves basic information about the device (uptime, OS version, etc.).
+- **`load_merge_candidate()`**: Loads a configuration candidate (intended changes).
+- **`commit_config()`**: Commits the configuration changes to the device.
 
-    get_facts(): Retrieves basic information about the device (uptime, OS version, etc.).
-    load_merge_candidate(): Loads a configuration candidate (intended changes).
-    commit_config(): Commits the configuration changes to the device.
-
-2.3.3 Example Script:
-
+#### **2.3.3 Example Script:**
 Using Napalm to retrieve device facts and update configuration:
-
-python
-
+```python
 from napalm import get_network_driver
 
 # Initialize the driver for the device type
@@ -151,23 +148,24 @@ else:
     
 # Close the connection
 device.close()
+```
 
-Chapter 3: Advanced Libraries for Specific Use Cases
-3.1 PySNMP
+---
+
+## **Chapter 3: Advanced Libraries for Specific Use Cases**
+
+### **3.1 PySNMP**
 
 PySNMP is a library for working with SNMP (Simple Network Management Protocol), commonly used for monitoring network devices.
-3.1.1 Installation:
 
-bash
-
+#### **3.1.1 Installation:**
+```bash
 pip install pysnmp
+```
 
-3.1.2 Example Script:
-
+#### **3.1.2 Example Script:**
 Retrieve SNMP data from a device:
-
-python
-
+```python
 from pysnmp.hlapi import *
 
 # SNMP GET command to retrieve sysDescr (System Description)
@@ -186,26 +184,26 @@ for errorIndication, errorStatus, errorIndex, varBinds in iterator:
     else:
         for varBind in varBinds:
             print(f'{varBind}')
+```
 
-3.2 Netconf & ncclient
+---
 
-Netconf is a protocol to manage network devices. ncclient is a Python library to interact with devices over Netconf.
-3.2.1 Installation:
+### **3.2 Netconf & ncclient**
 
-bash
+Netconf is a protocol to manage network devices. **ncclient** is a Python library to interact with devices over Netconf.
 
+#### **3.2.1 Installation:**
+```bash
 pip install ncclient
+```
 
-3.2.2 Key Functions:
+#### **3.2.2 Key Functions:**
+- **`manager.connect()`**: Establishes a connection to the device using Netconf.
+- **`get_config()`**: Retrieves configuration from the device.
+- **`edit_config()`**: Edits and commits configuration changes.
 
-    manager.connect(): Establishes a connection to the device using Netconf.
-    get_config(): Retrieves configuration from the device.
-    edit_config(): Edits and commits configuration changes.
-
-3.2.3 Example Script:
-
-python
-
+#### **3.2.3 Example Script:**
+```python
 from ncclient import manager
 
 # Connect to a Netconf-enabled device
@@ -224,23 +222,24 @@ with manager.connect(host='192.168.1.1', port=830, username='admin', password='p
     </config>
     """
     m.edit_config(target='running', config=config_data)
+```
 
-Chapter 4: Utility Libraries for Networking Automation
-4.1 PyYAML
+---
+
+## **Chapter 4: Utility Libraries for Networking Automation**
+
+### **4.1 PyYAML**
 
 An essential library for handling YAML files, which are commonly used in network automation for configuration templates or storing network inventory.
-4.1.1 Installation:
 
-bash
-
+#### **4.1.1 Installation:**
+```bash
 pip install pyyaml
+```
 
-4.1.2 Example Script:
-
+#### **4.1.2 Example Script:**
 Loading and parsing a YAML file:
-
-python
-
+```python
 import yaml
 
 # Load YAML data
@@ -249,22 +248,22 @@ with open('network_config.yaml') as f:
 
 # Access data
 print(data['hostname'])
+```
 
-4.2 Jinja2
+---
+
+### **4.2 Jinja2**
 
 Jinja2 is a templating engine, used to generate configuration files dynamically by feeding data into predefined templates.
-4.2.1 Installation:
 
-bash
-
+#### **4.2.1 Installation:**
+```bash
 pip install jinja2
+```
 
-4.2.2 Example Script:
-
+#### **4.2.2 Example Script:**
 Generate configuration from a template:
-
-python
-
+```python
 from jinja2 import Template
 
 # Jinja2 template
@@ -283,14 +282,16 @@ data = {
 # Render the template with data
 config = template.render(data)
 print(config)
+```
 
-Chapter 5: Building a Complete Network Automation Script
+---
+
+## **Chapter 5: Building a Complete Network Automation Script**
 
 Combining everything from libraries, templating, and configuration management, here's a final, more complex example:
-5.1 Full Automation Script:
 
-python
-
+### **5.1 Full Automation Script:**
+```python
 from netmiko import ConnectHandler
 from jinja2 import Template
 
