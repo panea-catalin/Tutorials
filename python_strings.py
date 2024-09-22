@@ -66,4 +66,66 @@ some_string = 'The word "python" refers to a snek.\n'
 print("This starts dispaying from 0 to -5: " + some_string[0:-5])
 print("This starts dispaying from 0 to 3: " + some_string[0:3])
 
-print('\n###String Formatting###')
+print('\n###String Formatting###\n')
+print('''my_string = "I like %s" % "Python"
+print(my_string)''')
+my_string = "I like %s" % "Python"
+print('\n' + my_string)
+print('''
+var = "cookies"
+newString = "I like %s" % var
+print(newString)''')
+var = "cookies"
+newString = "I like %s" % var
+print('\n' + newString)
+print('''
+anotherString = "I like %s and %s" % ("Python", var)
+print(anotherString)
+''')
+anotherString = "I like %s and %s" % ("Python", var) 
+print(anotherString + '\n')
+
+print('''my_string = "%i + %i = %i" % (1,2,3)
+print(my_string)''')
+my_string = "%i + %i = %i" % (1,2,3)
+print(my_string + '\n')
+
+print('''float_string = "%f" % (1.23)
+print(float_string)
+''')
+float_string = "%f" % (1.23)
+print(float_string + '\n')
+
+print('''float_string = "%.2f" % (1.23)
+print(float_string)
+''')
+float_string = "%.2f" % (1.23)
+print(float_string + '\n')
+
+print('''float_string = "%.2f" % (1.237)
+print(float_string)
+''')
+float_string = "%.2f" % (1.237)
+print(float_string + '\n')
+print('###\n')
+
+print('###Templates and the New String Formatting Methodology###\n')
+print('''print("%(lang)s is fun!" % {"lang":"Python"})
+''')
+print("%(lang)s is fun!" % {"lang":"Python"})
+print('\n###\n')
+print('''print("%(value)s %(value)s %(value)s !" % {"value":"SPAM"})
+''')
+print("%(value)s %(value)s %(value)s !" % {"value":"SPAM"})
+
+print('\n###String Format Method###\n')
+print('''print("Python is as simple as {0}, {1}, {2}".format("a", "b", "c"))
+''')
+print("Python is as simple as {0}, {1}, {2}".format("a", "b", "c"))
+print('\n###\n')
+
+print('''xy = {"x":0, "y":10}
+print("Graph a point at where x={x} and y={y}".format(**xy)
+''')
+xy = {"x":0, "y":10}
+print("Graph a point at where x={x} and y={y}".format(**xy))
